@@ -1,0 +1,25 @@
+package net.chemthunder.pathopathic.impl.index;
+
+import net.chemthunder.pathopathic.impl.util.disease.Disease;
+import net.chemthunder.pathopathic.impl.util.disease.Symptom;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+public interface PPPresetDiseases {
+    List<Disease> DISEASES = new ArrayList<>();
+
+    Disease LUNAR_MOTH_SYNDROME = create("Lunar Moth Syndrome", PPSymptoms.CANCEROUS, PPSymptoms.INSOMNIA, false, false);
+
+    private static Disease create(String name, Symptom primary, Symptom secondary, boolean isViral, boolean isLethal) {
+        Disease gen = new Disease(name, primary, secondary, isViral, isLethal);
+        DISEASES.add(gen);
+        return gen;
+    }
+
+    static void init() {
+        Disease.ALL_DISEASES.addAll(DISEASES);
+    }
+}
