@@ -1,7 +1,6 @@
 package net.chemthunder.pathopathic.impl.item;
 
 import net.chemthunder.pathopathic.impl.cca.entity.DiseaseComponent;
-import net.chemthunder.pathopathic.impl.index.PPPresetDiseases;
 import net.chemthunder.pathopathic.impl.index.PPSymptoms;
 import net.chemthunder.pathopathic.impl.util.disease.Disease;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,6 +1,7 @@
 package net.chemthunder.pathopathic.impl.item;
 
 import net.acoyt.acornlib.api.item.ModelVaryingItem;
+import net.acoyt.acornlib.api.util.MiscUtils;
 import net.chemthunder.pathopathic.impl.cca.entity.DiseaseComponent;
 import net.chemthunder.pathopathic.impl.component.HeldDiseaseComponent;
 import net.chemthunder.pathopathic.impl.index.PPDataComponents;
@@ -61,11 +62,11 @@ public class CoatedStickItem extends Item implements ModelVaryingItem {
 
 
 
-                tooltip.add(Text.literal(disease.name()).withColor(0xFFC6FC6F));
+                tooltip.add(Text.literal(MiscUtils.formatString(disease.name())).withColor(0xFFC6FC6F));
                 tooltip.add(
-                        Text.literal(disease.primary().getName())
+                        Text.literal(MiscUtils.formatString(disease.primary().getName())).withColor(0xFFC6FC6F)
                                 .append(Text.literal(", ").formatted(Formatting.DARK_GRAY))
-                                .append(Text.literal(disease.secondary().getName()))
+                                .append(Text.literal(MiscUtils.formatString(disease.secondary().getName())).withColor(0xFFC6FC6F))
                 );
             }
 

@@ -2,7 +2,6 @@ package net.chemthunder.pathopathic.impl.util.disease;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
