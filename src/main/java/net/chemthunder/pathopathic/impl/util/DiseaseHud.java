@@ -2,7 +2,8 @@ package net.chemthunder.pathopathic.impl.util;
 
 import net.acoyt.acornlib.api.util.MiscUtils;
 import net.chemthunder.pathopathic.impl.cca.entity.DiseaseComponent;
-import net.chemthunder.pathopathic.impl.util.disease.Disease;
+import net.chemthunder.pathopathic.impl.index.PPDiseases;
+import net.chemthunder.pathopathic.impl.util.disease.Symptom;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,6 +12,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.StringHelper;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DiseaseHud {
@@ -19,21 +21,29 @@ public class DiseaseHud {
         PlayerEntity player = client.player;
 
         if (player != null) {
-            DiseaseComponent disease = DiseaseComponent.KEY.get(player);
+            DiseaseComponent component = DiseaseComponent.KEY.get(player);
 
-            if (disease.getDisease() != Disease.EMPTY) {
+            if (component.getDisease() != PPDiseases.EMPTY) {
                 if (client.world != null) {
                     MutableText duration;
-                    if (disease.getDuration() != -1) {
-                        duration = Text.literal(StringHelper.formatTicks(disease.getDuration(), client.world.getTickManager().getTickRate())).formatted(Formatting.DARK_GRAY);
+                    if (component.getDuration() != -1) {
+                        duration = Text.literal(StringHelper.formatTicks(component.getDuration(), client.world.getTickManager().getTickRate())).formatted(Formatting.DARK_GRAY);
                     } else {
                         duration = Text.literal("∞").formatted(Formatting.DARK_GRAY);
                     }
 
-                    List<Text> contents = List.of(
-                            Text.of(Text.literal(MiscUtils.formatString(disease.getDisease().name())).withColor(0xFFC6FC6F)),
-                            Text.of(Text.literal(MiscUtils.formatString(disease.getDisease().primary().name)).withColor(0xFFC6FC6F).append(Text.of(", ")).append(Text.literal(MiscUtils.formatString(disease.getDisease().secondary().name)).withColor(0xFFC6FC6F))),
-                            Text.of(duration)
+                    Symptom primary = component.getDisease().primary().value();
+                    Symptom secondary = component.getDisease().secondary().value();
+
+                    List<Text> contents = Arrays.asList(
+                            Text.literal(MiscUtils.formatString(component.getDisease().name()))
+                                    .withColor(0xFFC6FC6F),
+                            Text.literal(MiscUtils.formatString(primary.getName()))
+                                    .withColor(0xFFC6FC6F)
+                                    .append(", ")
+                                    .append(Text.literal(MiscUtils.formatString(secondary.getName()))
+                                            .withColor(0xFFC6FC6F)),
+                            Text.literal(String.valueOf(duration))
                     );
 
                     drawContext.drawTooltip(client.textRenderer,
