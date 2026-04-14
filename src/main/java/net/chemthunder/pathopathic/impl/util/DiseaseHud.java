@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DiseaseHud {
-    public static void render(DrawContext drawContext) {
+    public static void render(DrawContext context) {
         MinecraftClient client = MinecraftClient.getInstance();
         PlayerEntity player = client.player;
 
@@ -43,13 +43,13 @@ public class DiseaseHud {
                                     .append(", ")
                                     .append(Text.literal(MiscUtils.formatString(secondary.getName()))
                                             .withColor(0xFFC6FC6F)),
-                            Text.literal(String.valueOf(duration))
+                            duration
                     );
 
-                    drawContext.drawTooltip(client.textRenderer,
+                    context.drawTooltip(client.textRenderer,
                             contents,
-                            drawContext.getScaledWindowWidth() / 2 + 90,
-                            drawContext.getScaledWindowHeight() / 2 + 90
+                            context.getScaledWindowWidth() / 2 + 90,
+                            context.getScaledWindowHeight() / 2 + 90
                     );
                 }
             }
