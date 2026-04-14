@@ -16,5 +16,8 @@ public interface PPDiseases {
     Disease DISTRACTED = DISEASES.register("distracted",
             name -> new Disease(name, PPSymptoms.DISTRACTED, PPSymptoms.EMPTY, false, false));
 
+    Disease TEST = DISEASES.register("test",
+            name -> new Disease(name, PPSymptoms.DISTRACTED, PPSymptoms.LETHARGIC, false, false));
+
     static void init() {}
 }

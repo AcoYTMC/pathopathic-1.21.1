@@ -17,8 +17,8 @@ public class FoulPouchItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         DiseaseComponent component = DiseaseComponent.KEY.get(user);
 
-        component.setDisease(PPDiseases.DISTRACTED);
-        component.setDuration(-1);
+        component.setDisease(PPDiseases.TEST);
+        component.setDuration(1900);
 
         return TypedActionResult.success(user.getStackInHand(hand));
     }

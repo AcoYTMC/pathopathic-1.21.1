@@ -25,12 +25,9 @@ public class DiseaseHud {
 
             if (component.getDisease() != PPDiseases.EMPTY) {
                 if (client.world != null) {
-                    MutableText duration;
-                    if (component.getDuration() != -1) {
-                        duration = Text.literal(StringHelper.formatTicks(component.getDuration(), client.world.getTickManager().getTickRate())).formatted(Formatting.DARK_GRAY);
-                    } else {
-                        duration = Text.literal("∞").formatted(Formatting.DARK_GRAY);
-                    }
+                    MutableText duration = component.getDuration() == -1
+                            ? Text.literal("∞").formatted(Formatting.DARK_GRAY)
+                            : Text.literal(StringHelper.formatTicks(component.getDuration(), client.world.getTickManager().getTickRate())).formatted(Formatting.DARK_GRAY);
 
                     Symptom primary = component.getDisease().primary().value();
                     Symptom secondary = component.getDisease().secondary().value();
@@ -55,13 +52,4 @@ public class DiseaseHud {
             }
         }
     }
-
-//    public static Text getDurationText(Disease disease, float multiplier, float tickRate) {
-//        if (effect.isInfinite()) {
-//            return Text.translatable("effect.duration.infinite");
-//        } else {
-//            int i = MathHelper.floor((float)effect.getDuration() * multiplier);
-//            return Text.literal(StringHelper.formatTicks(i, tickRate));
-//        }
-//    }
 }
